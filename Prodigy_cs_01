@@ -1,0 +1,26 @@
+def caesar(message, key, mode):
+    LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    translated = ''
+    message = message.upper()
+
+    for i in message:
+        templetter = LETTERS.find(i)
+        if templetter != -1:  # Check if the letter exists in LETTERS
+            if mode == 'encrypt':
+                templetter += key
+            elif mode == 'decrypt':
+                templetter -= key
+
+            if templetter >= len(LETTERS):
+                templetter -= len(LETTERS)
+            elif templetter < 0:
+                templetter += len(LETTERS)
+
+            translated += LETTERS[templetter]
+        else:
+            translated += i  # Non-alphabetic characters are added as is
+
+    return translated
+
+print(caesar("Internship", 6, 'encrypt'))
+print(caesar("OTZKXTYNOV", 6, 'decrypt'))
